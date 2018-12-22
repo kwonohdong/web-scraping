@@ -63,7 +63,7 @@ def draw_word_cloud(read_file_name:str, most_common_keword_num:int):
     most_common_keword_num: 워드클라우드로 보여주기 위한 주요 키워드 갯수.
     """
     try:
-        stop_words = ['전', '등', '신', '이', '그', '바', '기자', '선', '건', '때', '흐', '것', '로', '프', '더', '고', '위']
+        stop_words = ['전', '등', '도', '신', '이', '그', '바', '기자', '선', '건', '때', '흐', '것', '로', '프', '더', '고', '위']
         okt = Okt()
 
         with open(read_file_name, 'r', encoding='utf-8') as f:
@@ -98,17 +98,17 @@ def draw_word_cloud(read_file_name:str, most_common_keword_num:int):
 def main(argv):
     """중앙일보에서 특정 키워드를 포함하는 신문기사 크롤링 메인 모듈."""
     # argv = ['데이터', '1', 'D:\\article_file2.txt', '0.0', '50']
-    if len(argv) < 5:
-        print('[키워드][총 페이지 개수][기사 추출 결과 저장용 파일명 - 경로 포함][sleep seconds][most common keyword number]')
+    if len(argv) < 6:
+        print(u'[키워드][총 페이지 개수][기사 추출 결과 저장용 파일명 - 경로 포함][sleep seconds][most common keyword number]')
         print(argv)
         return
 
     try:
-        keword = argv[0]
-        total_page_num = int(argv[1])
-        article_file_name = argv[2]
-        sleep_seconds = float(argv[3])
-        most_common_keword_num = int(argv[4])
+        keword = argv[1]
+        total_page_num = int(argv[2])
+        article_file_name = argv[3]
+        sleep_seconds = float(argv[4])
+        most_common_keword_num = int(argv[5])
 
         article_link_list = get_link_from_news_article(keword, total_page_num)
         write_article_body_in_file(article_link_list, article_file_name, sleep_seconds)
@@ -119,6 +119,10 @@ def main(argv):
         print(ex)
 
 if __name__ == '__main__':
+    # python main.py 감옥 2 D:\article_file5.txt 0 500
+    # python main.py 박근혜 2 D:\article_file6.txt 0 500
+
+    # print(sys.argv)
     main(sys.argv)
 
 
